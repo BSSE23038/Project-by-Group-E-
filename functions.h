@@ -1,0 +1,8 @@
+//
+// Created by Zain Ali on 01/11/2023.
+//
+
+#ifndef PROJECT_BY_GROUP_E_FUNCTIONS_H
+#define PROJECT_BY_GROUP_E_FUNCTIONS_H
+
+#endif //PROJECT_BY_GROUP_E_FUNCTIONS_H
