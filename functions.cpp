@@ -79,7 +79,7 @@ void owner(int x) {
             if (id == username && pass == password) {
                 system("clear");
                 acc_verification = 1;
-                cout << "\t\t\tLogin successful !!!" << endl;
+                cout << "\t\t\tLogin successful !!!\n\n" << endl;
             } else {
                 system("clear");
                 cout << "\t\t\tWrong Username or Password." << endl;
@@ -101,14 +101,15 @@ void worker(int x) {
     getline(cin, password);
     ifstream worker_detail("Worker.txt");
     while (worker_detail >> id1 >> pass1) {
-        if (id1 == username && pass1 == password) {
+        if (username == id1 && password == pass1) {
             system("clear");
             cout << "\t\t\tLogin successful !!!" << endl;
-        } else {
-            system("clear");
-            cout << "\t\t\tWrong Username or Password." << endl;
-            worker(1);
         }
+//        else {
+//            system("clear");
+//            cout << "\t\t\tWrong Username or Password." << endl;
+//            worker(1);
+//        }
     }
 
 }
@@ -142,22 +143,82 @@ void piecesInfo() {
     listInput.close();
 }
 
-void addHours() {
+void addWorkersAndHours() {
     string names;
-    int numOfWorkers, arr[1000];
-    cout << "\t\t\tAdd the Names of Workers First !!!" << endl << endl;
-    cout <<"Enter The Number of Workers you Want To Enter." << endl;
+    int numOfWorkers, hours;
+    cout << "\t\t\tEnter The Number of Workers you Want To Enter: ";
     cin >> numOfWorkers;
     cin.ignore();
     system("clear");
-    ofstream workingHours("Workers_Name.txt");
-    cout <<"\t\t\tEnter The Names of Workers One By One.";
-    for(int i=0; i<numOfWorkers; i++){
-        cout <<"Enter The Name of Worker # " <<i+1 <<": ";
+    ofstream workerName("Workers_Names_And_Hours.txt", ios::app);
+    cout << "\t\t\tEnter The Names of Workers And Their Working Hours One By One.\n";
+    for (int i = 0; i < numOfWorkers; i++) {
+        cout << "Enter The Name of Worker # " << i + 1 << ": ";
         getline(cin, names);
-        workingHours << names << endl;
+        cout << "Enter The Working Hours of Worker # " << i + 1 << ": ";
+        cin >> hours;
+        cin.ignore();
+        workerName << names << "\t" << hours << endl;
+    }
+    workerName.close();
+}
+
+void watchHours() {
+    string name, nameFromFile;
+    int hours;
+    system("clear");
+    cout << "You Have to Enter the Name of the Worker in Order to Get the Working Hours of That Worker !!!" << endl;
+    cout << "Enter The Name of The Worker : ";
+    getline(cin, name);
+    ifstream check_hours("Workers_Names_And_Hours.txt");
+    while (check_hours >> nameFromFile) {
+        if (name == nameFromFile) {
+            check_hours >> hours;
+            cout << "The Working Hours of " << name << " are " << hours << " ." << endl;
+            break;
+        }
+    }
+}
+
+void calculateSalary() {
+    string name, nameFromFile;
+    int hours, rate, salary;
+    cout << "\t\t\tEnter the Name & Rate of One Hour of the Worker !!!\n\n" << endl;
+    cout << "Enter The Name of The Worker : ";
+    getline(cin, name);
+    cout << "Enter The Rate of One Hour : ";
+    cin >> rate;
+    cin.ignore();
+    ifstream check_hours("Workers_Names_And_Hours.txt");
+    while (check_hours >> nameFromFile) {
+        if (name == nameFromFile) {
+            check_hours >> hours;
+            salary = hours * rate;
+            system("clear");
+            cout << "\t\t\tThe Salary of " << name << " is " << salary << "$." << endl;
+
+        }
+    }
+}
+
+//customer
+void customer(int x) {
+    string size, color, price;
+    int quantity;
+    cout << left << setw(20) << "Sizes" << setw(20) << "Colors" << setw(23) << " Prices" << "Quantity\n"
+         << endl;
+    ifstream listInput("Listings.txt");
+    while (listInput >> size >> color >> price >> quantity) {
+        cout << left << setw(20) << size << setw(23) << color << setw(20) << price << quantity << " Pieces" << endl;
+    }
+    int numOfProducts;
+    cout <<"\n\n\t\t\tSelect Products To Get The Total Price !!!";
+    cout <<"\n\nEnter The Number of Products You Want To Select : ";
+    cin >> numOfProducts;
+    cin.ignore();
+    for (int i=0; i<numOfProducts; i++){
 
     }
 
-
 }
+

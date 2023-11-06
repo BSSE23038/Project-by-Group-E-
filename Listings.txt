@@ -1,2 +1,3 @@
-large	blue	231	43
-small	grey	43	5
+Large	Blue	20$	12
+Small	Grey	10$	10
+Medium	Mehroon	70$	30

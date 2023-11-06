@@ -9,5 +9,9 @@ void owner_regis();
 void worker(int x);
 void piecesInfo();
 void changePass();
-void addHours();
+void addWorkersAndHours();
+void watchHours();
+void calculateSalary();
+void customer(int x);
+
 #endif //PROJECT_BY_GROUP_E_FUNCTIONS_H
